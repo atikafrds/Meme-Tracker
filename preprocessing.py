@@ -6,6 +6,7 @@ from sklearn.cluster import KMeans
 
 load_data = pickle.load(open("quotes_02_sample.dat", "rb" ))
 
+# Make a numeric version of edge table
 def convert_to_numeric():
 	idx_data = len(load_data)
 
@@ -24,37 +25,41 @@ def convert_to_numeric():
 			# For Numeric Dictionary
 			link_dictionary.append(link)
 
-	print(string_container, file=open("nodetable_numeric.csv","w"))
+	print(string_container, file=open("edge_table_numeric.csv","w"))
 
-	string_container = "index,P\n"
+	string_container = "Index,P\n"
 	for i,l in enumerate(link_dictionary):
 		string_container += str(i) + "," + str(l) + "\n"
 
-	print(string_container, file=open("node_dict.csv","w"))
+	print(string_container, file=open("node_dictionary.csv","w"))
 
 	pickle.dump(link, open("sample_dictionary.dat", "wb"))
 
+
+rich_data_list = []
+
+# Get list of quotes
 def get_rich_data():
 	rich_data = []
 
 	for data in load_data:
 		if data.get('Q'):
 			rich_data.append(data.get('Q'))
+			rich_data_list.append(data)
 
 	return rich_data
 
-
 dataset = get_rich_data()
+convert_to_numeric()
 
 # Stop Words
 prestopwords = pd.read_csv("stopwords.csv")
 stopwords = [a[0] for a in prestopwords.values.tolist()]
 
-
 vectorizer = CountVectorizer()
 X = vectorizer.fit_transform(dataset)
 
-true_k = 12
+true_k = 2
 model = KMeans(n_clusters=true_k, init='k-means++', max_iter=100, n_init=1)
 model.fit(X)
 
@@ -67,14 +72,30 @@ for i in range(true_k):
         print(' %s' % terms[ind]),
     print
 
+# print("\n")
+# print("Prediction")
+
+for data in load_data:
+	if data.get('Q'):
+		Y = vectorizer.transform([data['Q']])
+		prediction = model.predict(Y)
+		data['C'] = int(prediction)
+		print(data['C'])
+	else:
+		data['C'] = -1
+		print(data['C'])
 
 print("\n")
-print("Prediction")
+print("\n")
+print(load_data)
 
-Y = vectorizer.transform(["chrome browser to open."])
-prediction = model.predict(Y)
-print(prediction)
+# Save Binary data
+pickle.dump(load_data, open("quotes_02_clustered_sample.dat", "wb"))
 
-Y = vectorizer.transform(["My cat is hungry."])
-prediction = model.predict(Y)
-print(prediction)
+# Y = vectorizer.transform(["chrome browser to open."])
+# prediction = model.predict(Y)
+# print(prediction)
+#
+# Y = vectorizer.transform(["My cat is hungry."])
+# prediction = model.predict(Y)
+# print(prediction)

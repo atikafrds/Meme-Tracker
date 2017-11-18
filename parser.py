@@ -32,7 +32,7 @@ list_of_data = list_of_data[1:]
 # Save Binary data
 pickle.dump(list_of_data, open("quotes_02_sample.dat", "wb"))
 
-# # # Load Binary Data
+# Load Binary Data
 # load_data = pickle.load(open("quotes_02_sample.dat", "rb" ))
 
 list_of_edge = []
@@ -66,13 +66,13 @@ for edge in list_of_data:
 
 	buffer_to_write += "'"+val_P+"','"+val_T+"','"+val_Q+"','"+" ".join(val_L)+"'\n"
 
-print(buffer_to_write, file=open("nodetable_new.csv","w"))
+print(buffer_to_write, file=open("node_table.csv","w"))
 
 buffer_to_write = "Source,Target\n"
 for i,edge in enumerate(list_of_edge):
-	buffer_to_write += "'"+edge[0]+"','"+edge[1]+"'\n"
+	buffer_to_write += edge[0]+","+edge[1]+"\n"
 
-print(buffer_to_write, file=open("edgetable_new.csv","w"))
+print(buffer_to_write, file=open("edge_table.csv","w"))
 
 # {
 # 	'P': 'http://boston.com/news/local/rhode_island/articles/2009/01/31/mass_daily?rss_id=boston.com+--+latest+news',
