@@ -1,0 +1,86 @@
+P	http://networking-forum.com/viewtopic.php?p=55777#55777
+T	2009-02-01 02:12:32
+
+P	http://karlanakulseth.com/blog/?p=935
+T	2009-02-01 02:12:32
+L	http://twitip.com/make-a-tweet-plan-to-get-the-most-from-twitter
+L	http://bravenewcode.com/wordtwit
+L	http://twuffer.com
+L	http://tweetlater.com
+L	http://tweetlater.com
+L	http://twuffer.com
+L	http://budurl.com
+L	http://twitter.com/hawaiianbrat96/statuses/1165013170
+L	http://twitter.com/hawaiianbrat96/statuses/1164948210
+
+P	http://soolasestmagusani.blogspot.com/2009/01/munarull-suitsulohega.html
+T	2009-02-01 02:12:34
+L	http://1.bp.blogspot.com/_ow9qo4d6stq/syssvsgtxoi/aaaaaaaaais/f2akvpyyiuy/s1600-h/jaanuar+2009+531.jpg
+
+P	http://bbs.21our.com/viewthread.php?tid=1570140
+T	2009-02-01 02:12:35
+L	http://bbs.21our.com/tag.php?name=%be%ad%bc%c3
+
+P	http://bbs.21our.com/viewthread.php?tid=1570144
+T	2009-02-01 02:12:35
+L	http://bbs.21our.com/tag.php?name=%cd%b6%d7%ca
+
+P	http://bbs.21our.com/viewthread.php?tid=1570147
+T	2009-02-01 02:12:35
+L	http://bbs.21our.com/tag.php?name=%b8%db%b9%c9
+
+P	http://bbs.21our.com/viewthread.php?tid=1570138
+T	2009-02-01 02:12:35
+L	http://bbs.21our.com/tag.php?name=%b9%c9%c6%b1
+
+P	http://boston.com/news/local/rhode_island/articles/2009/01/31/mass_daily?rss_id=boston.com+--+latest+news
+T	2009-02-01 02:12:41
+Q	massachusetts daily lottery
+L	http://boards.boston.com/javascript:openwindow(
+L	http://boston.com/news/local/rhode_island/articles/2009/01/31/mass_daily?mode=pf
+L	http://boards.boston.com/#
+L	http://boston.com/news/local/rhode_island/?camp=related-articles:on:link:article-page:more
+
+P	http://boston.com/news/local/vermont/articles/2009/01/31/megabucks?rss_id=boston.com+--+latest+news
+T	2009-02-01 02:12:41
+L	http://boston.com/news/javascript:openwindow(
+L	http://boston.com/news/local/vermont/articles/2009/01/31/megabucks?mode=pf
+L	http://boston.com/news/#
+L	http://boston.com/news/local/vermont/?camp=related-articles:on:link:article-page:more
+
+P	http://boston.com/news/nation/articles/2009/01/31/army_beats_bucknell_76_65?rss_id=boston.com+--+latest+news
+T	2009-02-01 02:12:41
+L	http://boards.boston.com/javascript:openwindow(
+L	http://boston.com/news/nation/articles/2009/01/31/army_beats_bucknell_76_65?mode=pf
+L	http://boards.boston.com/#
+L	http://boston.com/news/nation/?camp=related-articles:on:link:article-page:more
+
+P	http://boston.com/news/local/new_hampshire/articles/2009/01/31/megabucks?rss_id=boston.com+--+latest+news
+T	2009-02-01 02:12:41
+L	http://boards.boston.com/javascript:openwindow(
+L	http://boston.com/news/local/new_hampshire/articles/2009/01/31/megabucks?mode=pf
+L	http://boards.boston.com/#
+L	http://boston.com/news/local/new_hampshire/?camp=related-articles:on:link:article-page:more
+
+P	http://boston.com/news/world/asia/articles/2009/01/31/d962frto1?rss_id=boston.com+--+latest+news
+T	2009-02-01 02:12:41
+L	http://boards.boston.com/javascript:openwindow(
+L	http://boston.com/news/world/asia/articles/2009/01/31/d962frto1?mode=pf
+L	http://boards.boston.com/#
+L	http://boston.com/news/world/asia/?camp=related-articles:on:link:article-page:more
+
+P	http://boston.com/news/world/asia/articles/2009/01/31/15_dead_17_injured_in_bar_fire_in_southern_china?rss_id=boston.com+--+latest+news
+T	2009-02-01 02:12:41
+Q	set the ceiling on fire and the entire place was soon engulfed in flames
+L	http://boards.boston.com/javascript:openwindow(
+L	http://boston.com/news/world/asia/articles/2009/01/31/15_dead_17_injured_in_bar_fire_in_southern_china?mode=pf
+L	http://boards.boston.com/#
+L	http://boston.com/news/world/asia/?camp=related-articles:on:link:article-page:more
+
+P	http://boston.com/news/nation/articles/2009/01/31/us_military_deaths_in_iraq_war_at_4236?rss_id=boston.com+--+latest+news
+T	2009-02-01 02:12:41
+L	http://boston.com/news/javascript:openwindow(
+L	http://boston.com/news/nation/articles/2009/01/31/us_military_deaths_in_iraq_war_at_4236?mode=pf
+L	http://boston.com/news/#
+L	http://defenselink.mil/news
+L	http://boston.com/news/nation/?camp=related-articles:on:link:article-page:more
