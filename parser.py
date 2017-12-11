@@ -1,6 +1,6 @@
 import pickle
 
-fname = "samples.txt"
+fname = "avg_data.txt"
 with open(fname) as f:
 	content = f.readlines()
 

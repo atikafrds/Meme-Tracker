@@ -4,8 +4,10 @@ from collections import defaultdict
 import pickle
 import pandas as pd
 import csv
+from joblib import Parallel, delayed
 
-load_data = pickle.load(open("quotes_02_clustered_sample.dat", "rb" ))
+# load_data = pickle.load(open("quotes_02_clustered_sample.dat", "rb" ))
+load_data = pickle.load(open("cluster_membership.dat", "rb" ))
 node_dictionary = []
 edge_table = []
 
@@ -83,37 +85,60 @@ with open('edge_table_numeric.csv') as csvfile:
         edge['Target'] = target
         edge_table.append(edge)
 
-print(node_dictionary)
-print(edge_table)
+# print(node_dictionary)
+# print(edge_table)
 
-maxDepth = 3
+maxDepth = 50
 count_true = 0
 count_false = 0
 
-for x in range(0, node_dict_length-1):
-    for y in range(x+1, node_dict_length):
-        if g.IDDFS(x, y, maxDepth) == True:
-            print(str(x) + " -> " + str(y) + " is reachable.")
-            source_link = node_dictionary[x]
-            target_link = node_dictionary[y]
+count_reachable = []
+for i in range(0, len(load_data)):
+    count_reachable.append(0)
 
-            source_data = first(data for data in load_data if data.get('P') == source_link)
-            print(source_data)
+for i, cluster in enumerate(load_data):
+    print("Cluster",i)
+    num_data = len(cluster)
+    for j in range(0,num_data-1):
+        for k in range(j+1,num_data):
+            if g.IDDFS(cluster[j]['index'],cluster[k]['index'], maxDepth) == True:
+                print(str(cluster[j]['index']) + " -> " + str(cluster[k]['index']) + " is reachable.")
+                count_reachable[i] += 1
+            # else:
+            #     # print(str(cluster[i]['index']) + " -> " + str(cluster[j]['index']) + " is NOT reachable.")
 
-            if [data for data in load_data if data.get('P') == target_link] == True:
-                target_data = first(data for data in load_data if data.get('P') == target_link)
-                print(target_data)
-                if (source_data['C'] == target_data['C']):
-                    print(str(x) + " -> " + str(y) + " is in the SAME cluster.")
-                    count_true += 1
-                else:
-                    print(str(x) + " -> " + str(y) + " is NOT in the SAME cluster.")
-                    count_false += 1
-            else:
-                print("Node " + str(y) + " is NOT found.")
-        else:
-            print(str(x) + " -> " + str(y) + " is NOT reachable.")
-        print("\n")
+for i, cluster in enumerate(load_data):
+    reachable = count_reachable[i]
+    unreachable = len(cluster) - count_reachable[i]
+    print("Cluster", i)
+    print("Reachable:", reachable)
+    print("Unreachable:", unreachable)
+    print("Percentage:", reachable/len(cluster)*100, "%")
+
+# for x in range(0, node_dict_length-1):
+#     for y in range(x+1, node_dict_length):
+#         if g.IDDFS(x, y, maxDepth) == True:
+#             print(str(x) + " -> " + str(y) + " is reachable.")
+#             source_link = node_dictionary[x]
+#             target_link = node_dictionary[y]
+
+#             source_data = first(data for data in load_data if data.get('P') == source_link)
+#             print(source_data)
+
+#             if [data for data in load_data if data.get('P') == target_link] == True:
+#                 target_data = first(data for data in load_data if data.get('P') == target_link)
+#                 print(target_data)
+#                 if (source_data['C'] == target_data['C']):
+#                     print(str(x) + " -> " + str(y) + " is in the SAME cluster.")
+#                     count_true += 1
+#                 else:
+#                     print(str(x) + " -> " + str(y) + " is NOT in the SAME cluster.")
+#                     count_false += 1
+#             else:
+#                 print("Node " + str(y) + " is NOT found.")
+#         else:
+#             print(str(x) + " -> " + str(y) + " is NOT reachable.")
+#         print("\n")
 
 # if g.IDDFS(src, target, maxDepth) == True:
 #     print ("Target is reachable from source " +
