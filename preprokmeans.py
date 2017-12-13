@@ -22,13 +22,13 @@ def create_dictionary_to_csv():
 		# Iterate each link
 		if data.get("L"):
 			for link in data["L"]:
-				link = str(link).replace(",","")	
+				link = str(link).replace(",","")
 				if node_dictionary.get(link):
 					list_of_edges.append((i,node_dictionary.get(link)))
 				# else:
 				# throw Link :)
 
-	# Creating csv for node dictionary 
+	# Creating csv for node dictionary
 	string_container = "Index,P\n"
 	for k, v in node_dictionary.items():
 		string_container += str(v) + "," + str(k).replace(",","") + "\n"
@@ -64,8 +64,20 @@ create_dictionary_to_csv()
 
 
 # Stop Words
-prestopwords = pd.read_csv("stopwords.csv")
-stopwords = [a[0] for a in prestopwords.values.tolist()]
+# prestopwords = pd.read_csv("stopwords.csv")
+
+fname = "stopwords.txt"
+with open(fname) as f:
+	content = f.readlines()
+
+stopwords = []
+# list_of_data = []
+# data = {}
+# list_of_L = []
+for line in content:
+	stopwords.append(line.split("\n")[0])
+
+# stopwords = [a[0] for a in prestopwords.values.tolist()]
 
 vectorizer = CountVectorizer(stop_words=stopwords)
 X = vectorizer.fit_transform(dataset)
@@ -73,7 +85,7 @@ X = vectorizer.fit_transform(dataset)
 true_k = 33
 
 # Using KMeans
-model = KMeans(n_clusters=true_k, init='k-means++', max_iter=100, n_init=1)
+model = KMeans(n_clusters=true_k, init='k-means++', max_iter=1000, n_init=1)
 
 # Using DBSCAN
 # model = DBSCAN(eps=0.5, min_samples=5, metric='euclidean', metric_params=None, algorithm='auto', leaf_size=30, p=None, n_jobs=1)
@@ -99,7 +111,7 @@ for i in range(true_k):
 # n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
 
 cluster_membership = []
-for i in range(0,true_k + 1):
+for i in range(0,true_k+1):
 	cluster_membership.append([])
 
 
@@ -117,8 +129,19 @@ for data in load_data:
 		# print("Else",data)
 
 
+string_container = ""
+for i, cluster in enumerate(cluster_membership):
+	string_container += "Cluster " + str(i) + "\n"
+	for data in cluster:
+		string_container += str(data['index']) + "," + data['P'] + "\n"
+print(string_container, file=open("cluster_membership.csv","w"))
+
 # Save Binary data
 # pickle.dump(load_data, open("quotes_02_clustered_sample.dat", "wb"))
+
+for i, cluster in enumerate(cluster_membership):
+	print("Cluster", i, ": ", len(cluster))
+
 pickle.dump(cluster_membership, open("cluster_membership.dat", "wb"))
 
 

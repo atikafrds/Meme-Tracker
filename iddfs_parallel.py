@@ -58,41 +58,41 @@ def first(iterable, default=None):
         return item
     return default
 
-g = Graph (len(load_data));
+pre_node_dict = pd.read_csv("node_dictionary.csv")
+node_dict = pre_node_dict.values.tolist()
+print(node_dict[-1][0])
 
-node_dict = pd.read_csv("node_dictionary.csv")
-node_dict_length = len(node_dict.values)
-
-with open('node_dictionary.csv') as csvfile:
-    reader = csv.DictReader(csvfile)
-
-    for x in range(0, node_dict_length):
-        node_dictionary.append("dummy")
-
-    for row in reader:
-        source = int(row['Index'])
-        link = row['P']
-        node_dictionary[source] = link
-
+g = Graph (node_dict[-1][0]);
+#
+# # with open('node_dictionary.csv') as csvfile:
+# #     reader = csv.DictReader(csvfile)
+# #
+# #     for x in range(0, node_dict_length):
+# #         node_dictionary.append("dummy")
+# #
+# #     for row in reader:
+# #         source = int(row['Index'])
+# #         link = row['P']
+# #         node_dictionary[source] = link
+#
 with open('edge_table_numeric.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         source = int(row['Source'])
         target = int(row['Target'])
         g.addEdge(source, target)
-        edge = {}
-        edge['Source'] = source
-        edge['Target'] = target
-        edge_table.append(edge)
+        # edge = {}
+        # edge['Source'] = source
+        # edge['Target'] = target
+        # edge_table.append(edge)
 
 # print(node_dictionary)
-# print(edge_table)
+# print(edge_table[1]['Source'], edge_table[1]['Target'])
 
-maxDepth = 50
-count_true = 0
-count_false = 0
+maxDepth = 10
 
 count_reachable = []
+
 for i in range(0, len(load_data)):
     count_reachable.append(0)
 
@@ -100,10 +100,14 @@ def check_reachable(tuple_of_index):
     i = tuple_of_index[0]
     j = tuple_of_index[1]
     k = tuple_of_index[2]
+    # cluster = tuple_of_index[3]
 
     if g.IDDFS(cluster[j]['index'],cluster[k]['index'], maxDepth) == True:
         print(str(cluster[j]['index']) + " -> " + str(cluster[k]['index']) + " is reachable.")
-        count_reachable[i] += 1
+        count_reachable[i] = count_reachable[i] + 1
+        # count_true += 1
+    else:
+        print(str(cluster[j]['index']) + " -> " + str(cluster[k]['index']) + " is NOT reachable.")
 
 for i, cluster in enumerate(load_data):
     print("Cluster",i)
@@ -116,13 +120,16 @@ for i, cluster in enumerate(load_data):
     n_jobs = -1
     Parallel(n_jobs=n_jobs)(delayed(check_reachable)(tup) for tup in list_for_checking)
 
-for i, cluster in enumerate(load_data):
-    reachable = count_reachable[i]
-    unreachable = len(cluster) - count_reachable[i]
-    print("Cluster", i)
-    print("Reachable:", reachable)
-    print("Unreachable:", unreachable)
-    print("Percentage:", reachable/len(cluster)*100, "%")
+# print(count_reachable)
+
+# for i, cluster in enumerate(load_data):
+#     reachable = count_reachable[i]
+#     unreachable = len(cluster) - count_reachable[i]
+#     print("Cluster", i)
+#     if (reachable != 0):
+#         print("Reachable:", reachable)
+#         # print("Unreachable:", unreachable)
+#         print("Percentage:", reachable/len(cluster)*100, "%")
 
 # for x in range(0, node_dict_length-1):
 #     for y in range(x+1, node_dict_length):
